@@ -1071,6 +1071,7 @@ class BurpExtender( IBurpExtender, ITab, AbstractTableModel, IMessageEditorContr
 
 
     def introspection_to_queries( self, introspection_data ):
+        filter_values = ['Users', 'relativeUsers', 'allNotifications']
         
         queries = generate(introspection_data)
 
@@ -1088,6 +1089,11 @@ class BurpExtender( IBurpExtender, ITab, AbstractTableModel, IMessageEditorContr
                 # TODO: Move to UI
                 # if any(substring in query_s.lower() for substring in ['delete','remove','clear']):
                 #     continue
+                
+                # Check if value of "filter" is in gquery
+                
+                if all(value not in query_s for value in filter_values):
+                    continue
                             
                 gquery = self.create_gquery( query_s, qtype_nm, qname )
                 self.gqueries.add( gquery )
