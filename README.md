@@ -1,3 +1,16 @@
+I've made some changes here. This extension works by putting "filter" words to show only them when you load queries from the introspection file. There is no sorting, and it is pretty complicated for me to put one in there, so filtering can help to cover the whole scope in chunks. However, it may have a vague output of different calls. The key word is "Users", for example, will get you many lines containing the word Users. To assist with that problem, an additional python script was attached. It takes a file with precise grapql calls you need and introspection, then verifies if there is a specific call from the list in the introspection. After that, it prints formatted output to put in the extension on line 1074: filter_values = 
+
+Just to clarify if you have 'getUsers' in introspection, and you submit 'Users' in the raw_words.txt the python script will say : "not found".
+
+If you already have calls, you want to check, simply change the value on line 1074: filter_values =  and load the extension in burp.
+
+Great project kudos to Jared Meit (baron) 
+ - Email: j.meit@fwdsec.com
+ - Twitter: @jaredmeit
+
+##
+
+
 # Auto GraphQL Scanner (aka Auto GQL)
 
 **Auto GQL** *(currently in Beta)* is a Burp Suite extension that automates the process of vulnerability hunting in GraphQL APIs. It does this using only the URL to the GraphQL endpoint (and option configurations) to make an Introspection Query, turn that into all possible API requests, find possible injection points for payloads, and handing them off to Active Scanner. Prior to this, Burp's Active Scanner did not know where to put payloads for GraphQL requests. It was a dog's breakfast. This plugin "teaches" it where to put the payloads, AND creates the requests for you, so you don't have to click around in the proxy to try and get every combination.
